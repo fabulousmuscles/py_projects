@@ -1,5 +1,6 @@
 import unittest
 import pi
+from decimal import Decimal
 
 
 class TestPi(unittest.TestCase):
@@ -7,15 +8,24 @@ class TestPi(unittest.TestCase):
         with self.assertRaises(SystemExit) as se:
             pi.main(lambda: '12', lambda: 'q')
         self.assertEqual(se.exception.code, 0)
+        self.assertEqual(pi.pi(2), Decimal('3.14'))
 
     def test_pi_nan_input(self):
         with self.assertRaises(SystemExit) as se:
             pi.main(lambda: 'foo', lambda: 'q')
         self.assertEqual(se.exception.code, 0)
+        self.assertIn('Please try again', pi.pi('foo'))
 
     def test_pi_input_too_large(self):
         with self.assertRaises(SystemExit) as se:
-            pi.main(lambda: '400', lambda: 'q')
+            pi.main(lambda: '50', lambda: 'q')
+        self.assertEqual(se.exception.code, 0)
+        self.assertIn('Please try again', pi.pi(50))
+
+    def test_pi_input_negative(self):
+        with self.assertRaises(SystemExit) as se:
+            pi.main(lambda: '-2', lambda: 'q')
+        self.assertIn('Please try again', pi.pi(-2))
         self.assertEqual(se.exception.code, 0)
 
     def test_pi_with_no_input(self):
@@ -28,5 +38,6 @@ class TestPi(unittest.TestCase):
             pi.main(lambda: 'q', lambda: 'q')
         self.assertEqual(se.exception.code, 0)
 
+
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(buffer=True)

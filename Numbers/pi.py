@@ -18,31 +18,41 @@ def myprompt():
     return raw_input("> ")
 
 
-def main(prompt=myprompt, prompt2=myprompt):
+def pi(prec):
+    if prec > 48:
+        return error
+    try:
+        getcontext().prec = int(prec) + 1
+        pi = Decimal(math.pi).quantize(
+            Decimal('.{}'.format('0' * prec)), rounding=ROUND_DOWN
+        )
+        return pi
+    except Exception:
+        return error
+
+
+def main(prompt=myprompt, prompt2=None):
     """
     Returns the number Pi, rounded down, to the number of places given as
     input, up to 48 places.
     """
+    control = lambda: get_input(prompt2) if prompt2 else get_input(prompt)
     prec = get_input(prompt)
     while prec != 'q':
         try:
             prec = int(prec)
         except ValueError:
             print error
-            prec = get_input(prompt2)
+            prec = control()
             continue
 
         if prec > 48:
             print error
-            prec = get_input(prompt2)
+            prec = control()
             continue
 
-        getcontext().prec = prec + 1
-
-        print Decimal(math.pi).quantize(
-            Decimal('.{}'.format('0' * prec)), rounding=ROUND_DOWN
-        )
-        prec = get_input(prompt2)
+        print pi(prec)
+        prec = control()
 
     print "Goodbye."
     exit(0)
