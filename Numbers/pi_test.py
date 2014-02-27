@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import unittest
 import pi
 from decimal import Decimal
