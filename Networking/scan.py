@@ -15,12 +15,12 @@
 
 import socket
 
-# note that 1 is not subtracted from MAX b/c it's going to be used in xrange
-MAX = pow(2, 16)
+MAX = pow(2, 16) - 1
 MIN = 1
 
 
 def main(prompt):
+    """Collect information from the user, then start scanning."""
     print "Welcome."
     print "Enter the host IP you'd like scanned (default is localhost)"
     host = prompt()
@@ -56,9 +56,11 @@ def bye(s, host):
 
 
 def conn(host, port1, port2):
+    """Create a socket and attempt to connect to ports."""
     socket.setdefaulttimeout(2)
     count = 0
-    for port in xrange(port1, port2):
+    # We add 1 b/c we want the ending port to be included in the scan
+    for port in xrange(port1, port2 + 1):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             s.connect((host, port))
@@ -66,7 +68,6 @@ def conn(host, port1, port2):
             count += 1
             bye(s, host)
         except socket.error:
-            s.close()
             pass
     if not count:
         print "No open ports found."
