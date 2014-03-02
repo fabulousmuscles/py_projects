@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 ## Random Gift Suggestions ##
 # Enter various gifts for certain people when you think of them. When its time
 # to give them a gift (xmas, birthday, anniversary) it will randomly pick one.
@@ -6,14 +7,14 @@
 import json
 import os
 from random import randint
-from sys import argv
+from sys import argv, stderr
 
 
+MY_PROMPT = lambda: raw_input("> ")
 folder = os.path.join(os.getcwd(), "gifts")
 path = lambda person: os.path.join(
     folder, "%s.json" % person.replace(" ", "-").lower()
 )
-myprompt = lambda: raw_input("> ")
 
 
 def new_person(filename, person, gift):
@@ -36,6 +37,7 @@ def add_gift(filename, person, gift):
     # The file may not exist, or it may be empty. Either way create a new one.
     except Exception:
         new_person(filename, person, gift)
+    print "The gift '%s' for %s was successfully recorded." % (gift, person)
 
 
 def create(prompt):
@@ -48,11 +50,10 @@ def create(prompt):
           "\nIf you haven't recorded gifts for this person yet, "
           "a record will be created.")
     person = prompt()
-    print "Enter the gift you'd like to record for %s" % person
+    print "Enter the gift you'd like to record for %s." % person
     gift = prompt()
     filename = path(person)
     add_gift(filename, person, gift)
-    print "The gift '%s' for %s was successfully recorded." % (gift, person)
 
 
 def get_gifts(prompt):
@@ -73,7 +74,7 @@ def get_gifts(prompt):
 
 
 if __name__ == "__main__":
-    if argv[1] == "add":
+    if argv[1:] == ["add"]:
         try:
             os.makedirs(folder)
         except Exception as e:
@@ -82,6 +83,8 @@ if __name__ == "__main__":
             else:
                 print e
                 exit(1)
-        create(myprompt)
-    elif argv[1] == "get":
-        get_gifts(myprompt)
+        create(MY_PROMPT)
+    elif argv[1:] == ["get"]:
+        get_gifts(MY_PROMPT)
+    else:
+        print >>stderr, 'usage: gifts.py add|get'

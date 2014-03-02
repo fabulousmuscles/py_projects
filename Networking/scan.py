@@ -15,6 +15,7 @@
 
 import socket
 
+MY_PROMPT = lambda: raw_input("> ")
 MAX = pow(2, 16) - 1
 MIN = 1
 
@@ -22,7 +23,7 @@ MIN = 1
 def main(prompt):
     """Collect information from the user, then start scanning."""
     print "Welcome."
-    print "Enter the host IP you'd like scanned (default is localhost)"
+    print "Enter the host IP you'd like scanned (default is localhost)."
     host = prompt()
     host = host if host else '127.0.0.1'
     print("Enter the port number where the scanner should BEGIN scanning "
@@ -35,10 +36,6 @@ def main(prompt):
     port2 = int(port2) if port2 else MAX
     print "Beginning scan..."
     conn(host, port1, port2)
-
-
-def myprompt():
-    return raw_input("> ")
 
 
 def bye(s, host):
@@ -75,4 +72,4 @@ def conn(host, port1, port2):
         print "Found %d open ports." % count
 
 if __name__ == "__main__":
-    main(myprompt)
+    main(MY_PROMPT)

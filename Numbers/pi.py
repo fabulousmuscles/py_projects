@@ -6,6 +6,7 @@
 import math
 from decimal import *
 
+MY_PROMPT = lambda: raw_input("> ")
 error = "Please try again with a positive number, less than 48"
 message = ("Enter a number from 1 to 48 to see Pi to that many places,"
            " or q to quit.")
@@ -15,10 +16,6 @@ def get_input(prompt_func):
     print message
     prec = prompt_func()
     return prec
-
-
-def myprompt():
-    return raw_input("> ")
 
 
 def pi(prec):
@@ -34,7 +31,7 @@ def pi(prec):
         return error
 
 
-def main(prompt=myprompt, prompt2=None):
+def main(prompt=MY_PROMPT, prompt2=None):
     """
     Returns the number Pi, rounded down, to the number of places given as
     input, up to 48 places.
