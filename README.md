@@ -24,6 +24,7 @@ Text
 
 [**Count Words in a String**](https://github.com/fabulousmuscles/py_projects/blob/master/Text/count.py) - Counts the number 
 of individual words in a string or file and display the top 5 most used words. Example of counting words in a file:
+
     $ python count.py
     Welcome.
     Would you like me to count the words in a phrase or a file?
