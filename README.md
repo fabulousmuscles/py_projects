@@ -21,6 +21,20 @@ Networking
 
 Text
 ---------
+
+[**Count Words in a String**](https://github.com/fabulousmuscles/py_projects/blob/master/Text/count.py) - Counts the number 
+of individual words in a string or file and display the top 5 most used words. Example of counting words in a file:
+    $ python count.py
+    Welcome.
+    Would you like me to count the words in a phrase or a file?
+    > file
+    Enter a filename and I'll count the words in that file.
+    > constitution.txt
+    There were a total of 4613 words counted.
+    The 10 most used words were:
+    [('the', 423), ('of', 289), ('and', 193), ('shall', 191), ('be', 125), ('to', 114), 
+    ('in', 89), ('states', 80), ('or', 79), ('united', 54)]
+
 [**Random Gift Suggestions**] (https://github.com/fabulousmuscles/py_projects/blob/master/Text/gifts.py) - Enter various 
 gifts for certain people when you think of them. When its time to give them a gift (xmas, birthday, anniversary) it will 
 randomly pick one. Creates a folder called 'gifts' in the current working directory using os.getcwd(), then stores gift
