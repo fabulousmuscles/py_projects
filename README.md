@@ -12,6 +12,9 @@ Numbers
 
 [**Find PI to the Nth Digit**] (https://github.com/fabulousmuscles/py_projects/blob/master/Numbers/pi.py) - Enter a number and have the program generate PI up to that many decimal places. Keep a limit to how far the program will go.
 
+[**Tax Calculator**] (https://github.com/fabulousmuscles/py_projects/blob/master/Numbers/tax.py) - Asks the user to 
+enter a cost and a US state. It then returns the tax plus the total cost with tax.
+
 
 Networking
 ---------
@@ -23,7 +26,7 @@ Text
 ---------
 
 [**Count Words in a String**](https://github.com/fabulousmuscles/py_projects/blob/master/Text/count.py) - Counts the number 
-of individual words in a string or file and display the top 5 most used words. Example of counting words in a file:
+of individual words in a string or file and display the top 10 most used words. Example of counting words in a file:
 
     $ python count.py
     Welcome.
