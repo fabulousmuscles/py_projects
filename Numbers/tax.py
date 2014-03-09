@@ -16,20 +16,69 @@ import re
 MY_PROMPT = lambda: raw_input("> ")
 DOLLAR_PROMPT = lambda: raw_input("> $")
 
+STATES = {
+    'AK': 'Alaska',
+    'AL': 'Alabama',
+    'AR': 'Arkansas',
+    'AS': 'American Samoa',
+    'AZ': 'Arizona',
+    'CA': 'California',
+    'CO': 'Colorado',
+    'CT': 'Connecticut',
+    'DC': 'District of Columbia',
+    'DE': 'Delaware',
+    'FL': 'Florida',
+    'GA': 'Georgia',
+    'GU': 'Guam',
+    'HI': 'Hawaii',
+    'IA': 'Iowa',
+    'ID': 'Idaho',
+    'IL': 'Illinois',
+    'IN': 'Indiana',
+    'KS': 'Kansas',
+    'KY': 'Kentucky',
+    'LA': 'Louisiana',
+    'MA': 'Massachusetts',
+    'MD': 'Maryland',
+    'ME': 'Maine',
+    'MI': 'Michigan',
+    'MN': 'Minnesota',
+    'MO': 'Missouri',
+    'MP': 'Northern Mariana Islands',
+    'MS': 'Mississippi',
+    'MT': 'Montana',
+    'NA': 'National',
+    'NC': 'North Carolina',
+    'ND': 'North Dakota',
+    'NE': 'Nebraska',
+    'NH': 'New Hampshire',
+    'NJ': 'New Jersey',
+    'NM': 'New Mexico',
+    'NV': 'Nevada',
+    'NY': 'New York',
+    'OH': 'Ohio',
+    'OK': 'Oklahoma',
+    'OR': 'Oregon',
+    'PA': 'Pennsylvania',
+    'PR': 'Puerto Rico',
+    'RI': 'Rhode Island',
+    'SC': 'South Carolina',
+    'SD': 'South Dakota',
+    'TN': 'Tennessee',
+    'TX': 'Texas',
+    'UT': 'Utah',
+    'VA': 'Virginia',
+    'VI': 'Virgin Islands',
+    'VT': 'Vermont',
+    'WA': 'Washington',
+    'WI': 'Wisconsin',
+    'WV': 'West Virginia',
+    'WY': 'Wyoming'
+}
 
-def main(prompt, dollar_prompt):
-    print("Enter your state (full name only, "
-          "abbreviations not currently supported).")
-    state = prompt()
-    print "Enter the cost of your item."
-    cost = dollar_prompt()
-    while True:
-        try:
-            cost = float(cost)
-            break
-        except Exception:
-            print "Invalid input. Enter the cost of your item."
-            cost = dollar_prompt()
+
+def get_tax(state):
+    print "Getting tax rate..."
     content = urllib2.urlopen(
         'http://www.salestaxinstitute.com/resources/rates'
     ).read()
@@ -43,8 +92,46 @@ def main(prompt, dollar_prompt):
               "valid US state.")
         exit(1)
     tax = float(tax[0])
+    print "Done!"
+    return tax
+
+
+def get_input(prompt, dollar_prompt):
+    print "Enter your state (full name or abbreviation)"
+    state = prompt()
+    while True:
+        if len(state) == 2:
+            if state.upper() in STATES.keys():
+                    state = STATES[state.upper()]
+                    break
+            else:
+                print "Invalid abbreviation. Please try again."
+                state = prompt()
+        else:
+            if state.title() not in STATES.values():
+                print "Invalid state name. Please try again."
+                state = prompt()
+            else:
+                break
+    print "Enter the cost of your item."
+    cost = dollar_prompt()
+    while True:
+        try:
+            cost = float(cost)
+            break
+        except Exception:
+            print "Invalid input. Enter the cost of your item."
+            cost = dollar_prompt()
+    return state, cost
+
+
+def main(prompt, dollar_prompt):
+    state, cost = get_input(prompt, dollar_prompt)
+    tax = get_tax(state)
+    print "Computing tax..."
     total_tax = (tax / 100) * cost
     total = cost + total_tax
+    print "Done!"
     print "The tax rate is: %{:.3f}".format(tax)
     print "Total tax that must be paid: ${:.2f}".format(total_tax)
     print "Total cost with tax: ${:.2f}".format(total)
