@@ -10,22 +10,22 @@ be in Karan's Projects.).
 Numbers
 ---------
 
-[**Find PI to the Nth Digit**] (https://github.com/fabulousmuscles/py_projects/blob/master/Numbers/pi.py) - Enter a number and have the program generate PI up to that many decimal places. Keep a limit to how far the program will go.
+[**Find PI to the Nth Digit**] (https://github.com/wreckage/py_projects/blob/master/Numbers/pi.py) - Enter a number and have the program generate PI up to that many decimal places. Keep a limit to how far the program will go.
 
-[**Tax Calculator**] (https://github.com/fabulousmuscles/py_projects/blob/master/Numbers/tax.py) - Asks the user to 
+[**Tax Calculator**] (https://github.com/wreckage/py_projects/blob/master/Numbers/tax.py) - Asks the user to 
 enter a cost and a US state. It then returns the tax plus the total cost with tax.
 
 
 Networking
 ---------
 
-[**Port Scanner**] (https://github.com/fabulousmuscles/py_projects/blob/master/Networking/scan.py)- Enter an IP address and a port range where the program will then attempt to find open ports on the given computer by connecting to each of them. On any successful connections mark the port as open.
+[**Port Scanner**] (https://github.com/wreckage/py_projects/blob/master/Networking/scan.py)- Enter an IP address and a port range where the program will then attempt to find open ports on the given computer by connecting to each of them. On any successful connections mark the port as open.
 
 
 Text
 ---------
 
-[**Count Words in a String**](https://github.com/fabulousmuscles/py_projects/blob/master/Text/count.py) - Counts the number 
+[**Count Words in a String**](https://github.com/wreckage/py_projects/blob/master/Text/count.py) - Counts the number 
 of individual words in a string or file and display the top 10 most used words. Example of counting words in a file:
 
     $ python count.py
@@ -39,7 +39,7 @@ of individual words in a string or file and display the top 10 most used words. 
     [('the', 423), ('of', 289), ('and', 193), ('shall', 191), ('be', 125), ('to', 114), 
     ('in', 89), ('states', 80), ('or', 79), ('united', 54)]
 
-[**Random Gift Suggestions**] (https://github.com/fabulousmuscles/py_projects/blob/master/Text/gifts.py) - Enter various 
+[**Random Gift Suggestions**] (https://github.com/wreckage/py_projects/blob/master/Text/gifts.py) - Enter various 
 gifts for certain people when you think of them. When its time to give them a gift (xmas, birthday, anniversary) it will 
 randomly pick one. Creates a folder called 'gifts' in the current working directory using os.getcwd(), then stores gift
 ideas in a JSON file for each person. Example usage:
